@@ -22,7 +22,7 @@
             font-family: 'Segoe UI', sans-serif;
             color: var(--text-light);
             text-align: center;
-            min-height: 100vh;
+            min-height: 120vh; /* Un poco más alto para asegurar que haya scroll */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -44,58 +44,34 @@
             max-width: 400px;
             margin-bottom: 25px;
             z-index: 100;
+            position: sticky; /* Se queda arriba para que siempre puedan pausar */
+            top: 10px;
         }
 
         .btn-music-big {
             background: linear-gradient(45deg, #ffcc00, #ffaa00);
             color: #000;
             border: 4px solid #fff;
-            padding: 20px;
+            padding: 18px;
             border-radius: 15px;
             font-family: 'Press Start 2P', cursive;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             cursor: pointer;
             width: 100%;
-            box-shadow: 0 8px 0px #b37700, 0 15px 25px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 0px #b37700, 0 10px 20px rgba(0,0,0,0.3);
             transition: all 0.1s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 10px;
         }
 
-        .btn-music-big:active {
-            transform: translateY(4px);
-            box-shadow: 0 4px 0px #b37700, 0 5px 15px rgba(0,0,0,0.3);
-        }
+        .btn-music-big:active { transform: translateY(3px); box-shadow: 0 3px 0px #b37700; }
 
         .pulse { animation: pulse-animation 2s infinite; }
+        @keyframes pulse-animation { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
 
-        @keyframes pulse-animation {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-            100% { transform: scale(1); }
-        }
-
-        .sonic-rings .ring {
-            position: fixed;
-            width: 20px; height: 20px;
-            border: 4px solid gold;
-            border-radius: 50%;
-            box-shadow: 0 0 10px gold;
-            opacity: 0.4;
-            animation: floatRings 12s linear infinite;
-            z-index: 0;
-        }
-
-        @keyframes floatRings {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.4; }
-            90% { opacity: 0.4; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-        }
-
-        .container { padding: 0 20px 40px; width: 100%; max-width: 600px; z-index: 1; }
+        .container { padding: 0 20px 60px; width: 100%; max-width: 600px; z-index: 1; }
 
         .info-card {
             background: rgba(255, 255, 255, 0.1);
@@ -110,13 +86,13 @@
 
         h1 {
             font-family: 'Press Start 2P', cursive;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: #fff;
             text-shadow: 3px 3px 0px var(--sonic-blue);
             margin-bottom: 20px;
         }
 
-        h2 { font-family: 'Press Start 2P', cursive; font-size: 0.9rem; color: var(--sonic-accent); margin: 10px 0; }
+        h2 { font-family: 'Press Start 2P', cursive; font-size: 0.8rem; color: var(--sonic-accent); margin: 10px 0; }
 
         .btn {
             display: block;
@@ -126,36 +102,27 @@
             font-weight: bold;
             color: white;
             margin: 15px auto;
-            max-width: 320px;
-            transition: 0.3s;
+            max-width: 300px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-
-        .btn-confirm { background: #25d366; border-bottom: 5px solid #128c7e; }
-        .btn-map { background: #f44336; border-bottom: 5px solid #b71c1c; }
+        .btn-confirm { background: #25d366; }
+        .btn-map { background: #f44336; }
     </style>
 </head>
-<body onpointerdown="autoPlayMusic()">
+<body>
 
     <div class="music-header">
-        <button id="musicBtn" class="btn-music-big pulse" onclick="toggleMusic(); event.stopPropagation();">
+        <button id="musicBtn" class="btn-music-big pulse" onclick="toggleMusic(event)">
             <span id="music-icon">▶️</span> 
             <span id="btn-text">PONER MÚSICA</span>
         </button>
-    </div>
-
-    <div class="sonic-rings">
-        <div class="ring" style="left: 10%; animation-delay: 0s;"></div>
-        <div class="ring" style="left: 30%; animation-delay: 3s;"></div>
-        <div class="ring" style="left: 70%; animation-delay: 6s;"></div>
-        <div class="ring" style="left: 90%; animation-delay: 1s;"></div>
     </div>
 
     <div class="container">
         <h1>¡FIESTA!</h1>
         <div class="info-card">
             <h2>SAID NEFTALÍ (9)</h2>
-            <p style="font-family: 'Press Start 2P'; font-size: 0.8rem;">&</p>
+            <p>&</p>
             <h2>PAULETHE ITANDEHUI (6)</h2>
             <p style="margin: 15px 0;">¡Nivel de diversión: MÁXIMO!</p>
             <hr style="opacity: 0.2; margin: 15px 0;">
@@ -169,49 +136,59 @@
         </div>
     </div>
 
-    <audio id="bgMusic" loop>
+    <audio id="bgMusic" loop preload="auto">
         <source src="01. Minecraft - Lava Chicken (Original Game Soundtrack).mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        var music = document.getElementById("bgMusic");
-        var btn = document.getElementById("musicBtn");
-        var icon = document.getElementById("music-icon");
-        var txt = document.getElementById("btn-text");
-        var interactionDone = false;
+        const music = document.getElementById("bgMusic");
+        const btn = document.getElementById("musicBtn");
+        const icon = document.getElementById("music-icon");
+        const txt = document.getElementById("btn-text");
+        let isPlaying = false;
 
-        // Función para sonar al primer toque en cualquier lado
-        function autoPlayMusic() {
-            if (!interactionDone) {
+        // Función Maestra para iniciar audio
+        function startAudio() {
+            if (!isPlaying) {
                 music.play().then(() => {
-                    updateButtonUI(true);
-                    interactionDone = true;
-                }).catch(e => console.log("Esperando toque..."));
+                    isPlaying = true;
+                    updateUI(true);
+                    // Una vez que suena, quitamos los escuchas para ahorrar batería
+                    removeListeners();
+                }).catch(e => console.log("Bloqueado por navegador"));
             }
         }
 
-        // Función manual del botón
-        function toggleMusic() {
-            interactionDone = true; // Si usa el botón, ya no necesitamos el autoPlay
+        function toggleMusic(e) {
+            if(e) e.stopPropagation();
             if (music.paused) {
                 music.play();
-                updateButtonUI(true);
+                isPlaying = true;
+                updateUI(true);
             } else {
                 music.pause();
-                updateButtonUI(false);
+                isPlaying = false;
+                updateUI(false);
             }
         }
 
-        function updateButtonUI(isPlaying) {
-            if (isPlaying) {
-                icon.innerHTML = "⏸️";
-                txt.innerHTML = "PAUSAR MÚSICA";
-                btn.classList.remove("pulse");
-            } else {
-                icon.innerHTML = "▶️";
-                txt.innerHTML = "PONER MÚSICA";
-                btn.classList.add("pulse");
-            }
+        function updateUI(playing) {
+            icon.innerHTML = playing ? "⏸️" : "▶️";
+            txt.innerHTML = playing ? "PAUSAR MÚSICA" : "PONER MÚSICA";
+            playing ? btn.classList.remove("pulse") : btn.classList.add("pulse");
+        }
+
+        // Agregamos múltiples detectores para asegurar el inicio
+        window.addEventListener('touchstart', startAudio);
+        window.addEventListener('mousedown', startAudio);
+        window.addEventListener('scroll', startAudio);
+        window.addEventListener('wheel', startAudio);
+
+        function removeListeners() {
+            window.removeEventListener('touchstart', startAudio);
+            window.removeEventListener('mousedown', startAudio);
+            window.removeEventListener('scroll', startAudio);
+            window.removeEventListener('wheel', startAudio);
         }
     </script>
 
