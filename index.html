@@ -2,237 +2,266 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Nuestra Fiesta de Cumpleaños!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>¡Nivel de Fiesta Desbloqueado! - Said y Paulethe</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
     <style>
+        /* --- VARIABLES DE COLOR --- */
         :root {
-            --mc-green: #388700;
-            --sonic-blue: #0054b2;
-            --mc-dirt: #795548;
+            --sonic-main: #0054b2;
+            --sonic-accent: #00ff00; /* Neón Green de las Esmeraldas */
+            --mc-dirt-light: #8B4513;
+            --mc-grass: #388700;
+            --text-dark: #111;
+            --text-light: #fff;
+            --shadow-card: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* --- ESTILOS GENERALES --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            cursor: url('https://cur.cursors-4u.net/games/gam-11/gam1071.cur'), auto; /* Cursor de Minecraft (opcional) */
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Courier New', Courier, monospace;
-            background: linear-gradient(135deg, var(--sonic-blue), var(--mc-green));
-            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna para texto largo */
+            color: var(--text-light);
             text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             overflow-x: hidden;
+            background-color: #000;
         }
 
-        /* Animación de fondo */
-        .container {
-            padding: 20px;
-            animation: fadeIn 2s ease-in;
+        /* --- IMAGEN DE FONDO DE PANTALLA COMPLETA --- */
+        .background-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            /* ESTA ES LA URL DE LA IMAGEN. LA HE ELEGIDO PARA QUE COMBINE AMBOS MUNDOS */
+            background-image: url('https://img.izismile.com/img/img13/20200522/640/minecraft_vs_sonic_the_hedgehog_who_wins_640_01.jpg'); 
+            background-size: cover;
+            background-position: center;
+            filter: blur(5px) brightness(0.6); /* Desenfoca y oscurece el fondo para que el texto resalte */
+            z-index: -1;
+            animation: zoomBg 20s infinite alternate;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes zoomBg {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        /* --- TÍTULOS CON EFECTO --- */
+        .titles-container {
+            margin-bottom: 30px;
+            animation: slideInDown 1s ease-out;
         }
 
         h1 {
-            font-size: 2.5rem;
-            text-shadow: 3px 3px 0px #000;
-            margin-bottom: 10px;
+            font-family: 'Press Start 2P', cursive; /* Fuente pixelada */
+            font-size: 2rem;
+            text-transform: uppercase;
+            color: var(--text-light);
+            text-shadow: 
+                0 0 10px var(--sonic-accent),
+                0 0 20px var(--sonic-accent),
+                0 0 40px var(--sonic-accent);
+            animation: glitch 3s infinite;
         }
 
-        .hero-img {
-            width: 80%;
-            max-width: 400px;
-            border: 5px solid white;
-            border-radius: 15px;
-            margin: 20px 0;
-            animation: bounce 2s infinite alternate;
-        }
+        @media (max-width: 600px) { h1 { font-size: 1.2rem; } }
 
-        @keyframes bounce {
-            from { transform: scale(1); }
-            to { transform: scale(1.05); }
+        /* --- TARJETAS MODERNAS (Glassmorphism) --- */
+        .container {
+            padding: 20px;
+            width: 100%;
+            max-width: 700px;
+            z-index: 1;
         }
 
         .info-card {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 15px;
-            border: 2px dashed #fff;
-            margin: 20px auto;
-            max-width: 500px;
+            background: rgba(255, 255, 255, 0.1); /* Efecto cristal */
+            backdrop-filter: blur(10px); /* Desenfoque detrás de la tarjeta */
+            -webkit-backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-card);
+            margin-bottom: 30px;
+            animation: fadeIn 1.5s ease-in;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Brillo interno para las tarjetas */
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: cardShine 10s infinite;
+        }
+
+        @keyframes cardShine {
+            0% { transform: rotate(45deg) translate(-150%, -150%); }
+            100% { transform: rotate(45deg) translate(150%, 150%); }
+        }
+
+        h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.3rem;
+            color: var(--sonic-accent);
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 0px #000;
+        }
+
+        @media (max-width: 600px) { h2 { font-size: 0.9rem; } }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #ddd;
+            margin-bottom: 25px;
+        }
+
+        /* --- BOTONES MODERNOS INTERACTIVOS --- */
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
         }
 
         .btn {
-            display: inline-block;
-            padding: 15px 30px;
-            margin: 10px;
-            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 35px;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            color: white;
-            transition: 0.3s;
-            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+            max-width: 350px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .btn-confirm { background-color: #25d366; } /* WhatsApp Green */
-        .btn-map { background-color: #f44336; }
-
-        .btn:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-
-        /* Estilo pixelado para botones */
-        .pixel-border {
-            box-shadow: 4px 4px 0px #000;
+        .btn:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
         }
+
+        .btn:active {
+            transform: translateY(0px) scale(1);
+        }
+
+        .btn-confirm {
+            background-color: #25d366; /* WhatsApp Green */
+            color: #fff;
+            border: 2px solid transparent;
+        }
+        .btn-confirm:hover {
+            background-color: transparent;
+            border-color: #25d366;
+            color: #25d366;
+        }
+
+        .btn-map {
+            background-color: #f44336; /* Google Maps Red */
+            color: #fff;
+            border: 2px solid transparent;
+        }
+        .btn-map:hover {
+            background-color: transparent;
+            border-color: #f44336;
+            color: #f44336;
+        }
+
+        /* --- MÚSICA MODERNIZADA --- */
+        .music-player {
+            margin-top: 20px;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+        audio {
+            margin-top: 10px;
+            width: 100%;
+            max-width: 300px;
+            height: 35px;
+            outline: none;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+        audio:hover { opacity: 1; }
+
+        /* --- ANIMACIONES EXTRA --- */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideInDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes glitch {
+            0% { text-shadow: 1px 1px 0 #000, -1px -1px 0 #000; }
+            2% { text-shadow: 3px 0 0 red, -3px 0 0 blue; }
+            4% { text-shadow: -3px 0 0 red, 3px 0 0 blue; }
+            6% { text-shadow: 1px 1px 0 #000, -1px -1px 0 #000; }
+            100% { text-shadow: 1px 1px 0 #000, -1px -1px 0 #000; }
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>¡Nivel de Fiesta Desbloqueado!</h1>
-        
-        <div class="info-card">
-            <h2>Said Neftalí (9 años) <br>& <br> Paulethe Itandehui (6 años)</h2>
-            <p>¡Te invitamos a correr a la velocidad de Sonic y construir momentos increíbles en nuestro mundo de Minecraft!</p>
-            
-            <hr>
-            
-            <h3>📅 Domingo 12 de Abril, 2026</h3>
-            <p>¡La aventura comienza pronto!</p>
-            
-            <a href="https://maps.app.goo.gl/mts8bRb9jtbAcLdi6" class="btn btn-map pixel-border">📍 Ver Ubicación</a>
-        </div>
-
-        <div class="info-card">
-            <h3>¿Te unes a la partida?</h3>
-            <p>Confirma antes de que se acabe el tiempo.</p>
-            <a href="https://wa.me/529515841063?text=¡Hola! Confirmo mi asistencia al cumpleaños de Said y Paulethe 🎮🏃‍♂️" class="btn btn-confirm pixel-border">✅ Confirmar por WhatsApp</a>
-        </div>
-
-        <div style="margin-top: 30px;">
-            <p>🔊 Dale Play a la música</p>
-            <audio controls loop>
-                <source src="TU_URL_DE_MUSICA_AQUI.mp3" type="audio/mpeg">
-                Tu navegador no soporta audio.<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Nuestra Fiesta de Cumpleaños!</title>
-    <style>
-        :root {
-            --mc-green: #388700;
-            --sonic-blue: #0054b2;
-            --mc-dirt: #795548;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Courier New', Courier, monospace;
-            background: linear-gradient(135deg, var(--sonic-blue), var(--mc-green));
-            color: white;
-            text-align: center;
-            overflow-x: hidden;
-        }
-
-        /* Animación de fondo */
-        .container {
-            padding: 20px;
-            animation: fadeIn 2s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            text-shadow: 3px 3px 0px #000;
-            margin-bottom: 10px;
-        }
-
-        .hero-img {
-            width: 80%;
-            max-width: 400px;
-            border: 5px solid white;
-            border-radius: 15px;
-            margin: 20px 0;
-            animation: bounce 2s infinite alternate;
-        }
-
-        @keyframes bounce {
-            from { transform: scale(1); }
-            to { transform: scale(1.05); }
-        }
-
-        .info-card {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 15px;
-            border: 2px dashed #fff;
-            margin: 20px auto;
-            max-width: 500px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 15px 30px;
-            margin: 10px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: bold;
-            color: white;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        .btn-confirm { background-color: #25d366; } /* WhatsApp Green */
-        .btn-map { background-color: #f44336; }
-
-        .btn:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-
-        /* Estilo pixelado para botones */
-        .pixel-border {
-            box-shadow: 4px 4px 0px #000;
-        }
-    </style>
-</head>
-<body>
+    <div class="background-overlay"></div>
 
     <div class="container">
-        <h1>¡Nivel de Fiesta Desbloqueado!</h1>
+        
+        <div class="titles-container">
+            <h1>¡NIVEL FIESTA DESCUBIERTO!</h1>
+        </div>
         
         <div class="info-card">
-            <h2>Said Neftalí (9 años) <br>& <br> Paulethe Itandehui (6 años)</h2>
-            <p>¡Te invitamos a correr a la velocidad de Sonic y construir momentos increíbles en nuestro mundo de Minecraft!</p>
+            <h2>SAID NEFTALÍ (9 AÑOS)</h2>
+            <p>&</p>
+            <h2>PAULETHE ITANDEHUI (6 AÑOS)</h2>
             
-            <hr>
+            <p>Una aventura épica está por comenzar. ¡Corre a la velocidad de la luz y prepárate para construir los mejores recuerdos!</p>
             
-            <h3>📅 Domingo 12 de Abril, 2026</h3>
-            <p>¡La aventura comienza pronto!</p>
-            
-            <a href="https://maps.app.goo.gl/mts8bRb9jtbAcLdi6" class="btn btn-map pixel-border">📍 Ver Ubicación</a>
+            <div class="btn-group">
+                <h3>📅 Domingo 12 de Abril, 2026</h3>
+                <p>La partida inicia pronto...</p>
+                <a href="https://maps.app.goo.gl/mts8bRb9jtbAcLdi6" target="_blank" class="btn btn-map">📍 Ver Ubicación del Mapa</a>
+            </div>
         </div>
 
         <div class="info-card">
-            <h3>¿Te unes a la partida?</h3>
-            <p>Confirma antes de que se acabe el tiempo.</p>
-            <a href="https://wa.me/529515841063?text=¡Hola! Confirmo mi asistencia al cumpleaños de Said y Paulethe 🎮🏃‍♂️" class="btn btn-confirm pixel-border">✅ Confirmar por WhatsApp</a>
+            <h2>¿TE UNES A LA PARTIDA?</h2>
+            <p>Confirma antes de que se acabe el tiempo (GAME OVER).</p>
+            <div class="btn-group">
+                <a href="https://wa.me/529515841063?text=¡Hola! Confirmo mi asistencia a la súper fiesta de Said y Paulethe 🎮🏃‍♂️✨" target="_blank" class="btn btn-confirm">✅ Confirmar por WhatsApp</a>
+            </div>
         </div>
 
-        <div style="margin-top: 30px;">
-            <p>🔊 Dale Play a la música</p>
-            <audio controls loop>
-                <source src="TU_URL_DE_MUSICA_AQUI.mp3" type="audio/mpeg">
-                Tu navegador no soporta audio.
-            </audio>
-        </div>
-    </div>
-
-</body>
-</html>
-
-            </audio>
+        <div class="music-player">
+            <p>🎧 Presiona Play para activar la banda sonora</p>
+            ) de la línea de abajo.
+            -->
+            <p>(La música se activará después de que interactúes con la página)</p>
         </div>
     </div>
 
