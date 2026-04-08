@@ -25,13 +25,13 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             overflow-x: hidden;
             background-color: var(--mc-sky);
             background-image: linear-gradient(rgba(120, 167, 255, 0.7), rgba(120, 167, 255, 0.7)), url('https://i.imgur.com/vHqY7Gk.png');
             background-size: cover;
             animation: moveBackground 60s linear infinite; 
+            padding-top: 20px;
         }
 
         @keyframes moveBackground {
@@ -39,7 +39,44 @@
             to { background-position: 100% 0; }
         }
 
-        /* Anillos de Sonic */
+        .music-header {
+            width: 90%;
+            max-width: 400px;
+            margin-bottom: 25px;
+            z-index: 100;
+        }
+
+        .btn-music-big {
+            background: linear-gradient(45deg, #ffcc00, #ffaa00);
+            color: #000;
+            border: 4px solid #fff;
+            padding: 20px;
+            border-radius: 15px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 8px 0px #b37700, 0 15px 25px rgba(0,0,0,0.3);
+            transition: all 0.1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn-music-big:active {
+            transform: translateY(4px);
+            box-shadow: 0 4px 0px #b37700, 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .pulse { animation: pulse-animation 2s infinite; }
+
+        @keyframes pulse-animation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
         .sonic-rings .ring {
             position: fixed;
             width: 20px; height: 20px;
@@ -58,7 +95,7 @@
             100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
-        .container { padding: 20px; width: 100%; max-width: 600px; z-index: 1; }
+        .container { padding: 0 20px 40px; width: 100%; max-width: 600px; z-index: 1; }
 
         .info-card {
             background: rgba(255, 255, 255, 0.1);
@@ -74,49 +111,38 @@
         h1 {
             font-family: 'Press Start 2P', cursive;
             font-size: 1.5rem;
-            color: gold;
-            text-shadow: 2px 2px 0px #000;
+            color: #fff;
+            text-shadow: 3px 3px 0px var(--sonic-blue);
             margin-bottom: 20px;
         }
 
-        h2 { font-family: 'Press Start 2P', cursive; font-size: 1rem; color: var(--sonic-accent); margin: 10px 0; }
+        h2 { font-family: 'Press Start 2P', cursive; font-size: 0.9rem; color: var(--sonic-accent); margin: 10px 0; }
 
         .btn {
             display: block;
-            padding: 15px;
+            padding: 18px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
             color: white;
-            margin: 10px auto;
-            max-width: 300px;
+            margin: 15px auto;
+            max-width: 320px;
             transition: 0.3s;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        .btn-confirm { background: #25d366; }
-        .btn-map { background: #f44336; }
-        .btn:hover { transform: scale(1.05); }
-
-        /* Estilo del reproductor invisible/flotante */
-        #music-control {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(0,0,0,0.6);
-            padding: 10px;
-            border-radius: 50%;
-            width: 50px; height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 100;
-            border: 2px solid gold;
-        }
+        .btn-confirm { background: #25d366; border-bottom: 5px solid #128c7e; }
+        .btn-map { background: #f44336; border-bottom: 5px solid #b71c1c; }
     </style>
 </head>
-<body onclick="playMusic()">
+<body onpointerdown="autoPlayMusic()">
+
+    <div class="music-header">
+        <button id="musicBtn" class="btn-music-big pulse" onclick="toggleMusic(); event.stopPropagation();">
+            <span id="music-icon">▶️</span> 
+            <span id="btn-text">PONER MÚSICA</span>
+        </button>
+    </div>
 
     <div class="sonic-rings">
         <div class="ring" style="left: 10%; animation-delay: 0s;"></div>
@@ -126,28 +152,21 @@
     </div>
 
     <div class="container">
-        <h1>¡NIVEL FIESTA!</h1>
-        
+        <h1>¡FIESTA!</h1>
         <div class="info-card">
             <h2>SAID NEFTALÍ (9)</h2>
-            <p>&</p>
+            <p style="font-family: 'Press Start 2P'; font-size: 0.8rem;">&</p>
             <h2>PAULETHE ITANDEHUI (6)</h2>
-            <p style="margin: 15px 0;">¡Prepárate para construir una aventura a máxima velocidad!</p>
+            <p style="margin: 15px 0;">¡Nivel de diversión: MÁXIMO!</p>
             <hr style="opacity: 0.2; margin: 15px 0;">
             <p>📅 Domingo 12 de Abril, 2026</p>
-            <a href="https://maps.app.goo.gl/mts8bRb9jtbAcLdi6" target="_blank" class="btn btn-map">📍 Ver Ubicación</a>
+            <a href="https://maps.app.goo.gl/mts8bRb9jtbAcLdi6" target="_blank" class="btn btn-map">📍 VER UBICACIÓN</a>
         </div>
 
         <div class="info-card">
             <p>¿Te unes a la partida?</p>
-            <a href="https://wa.me/529515841063?text=¡Confirmo mi asistencia a la fiesta de Said y Paulethe! 🎮✨" class="btn btn-confirm">✅ Confirmar WhatsApp</a>
+            <a href="https://wa.me/529515841063?text=¡Confirmo mi asistencia a la fiesta de Said y Paulethe! 🎮✨" class="btn btn-confirm">✅ CONFIRMAR ASISTENCIA</a>
         </div>
-
-        <p style="font-size: 0.8rem; opacity: 0.8;">(Toca cualquier parte para activar la música 🎵)</p>
-    </div>
-
-    <div id="music-control" onclick="toggleMusic()">
-        <span id="music-icon">🎵</span>
     </div>
 
     <audio id="bgMusic" loop>
@@ -156,26 +175,42 @@
 
     <script>
         var music = document.getElementById("bgMusic");
+        var btn = document.getElementById("musicBtn");
         var icon = document.getElementById("music-icon");
-        var hasStarted = false;
+        var txt = document.getElementById("btn-text");
+        var interactionDone = false;
 
-        function playMusic() {
-            if(!hasStarted) {
-                music.play().catch(function(error) {
-                    console.log("Esperando interacción para audio...");
-                });
-                hasStarted = true;
-                icon.innerHTML = "🔊";
+        // Función para sonar al primer toque en cualquier lado
+        function autoPlayMusic() {
+            if (!interactionDone) {
+                music.play().then(() => {
+                    updateButtonUI(true);
+                    interactionDone = true;
+                }).catch(e => console.log("Esperando toque..."));
             }
         }
 
+        // Función manual del botón
         function toggleMusic() {
+            interactionDone = true; // Si usa el botón, ya no necesitamos el autoPlay
             if (music.paused) {
                 music.play();
-                icon.innerHTML = "🔊";
+                updateButtonUI(true);
             } else {
                 music.pause();
-                icon.innerHTML = "🔈";
+                updateButtonUI(false);
+            }
+        }
+
+        function updateButtonUI(isPlaying) {
+            if (isPlaying) {
+                icon.innerHTML = "⏸️";
+                txt.innerHTML = "PAUSAR MÚSICA";
+                btn.classList.remove("pulse");
+            } else {
+                icon.innerHTML = "▶️";
+                txt.innerHTML = "PONER MÚSICA";
+                btn.classList.add("pulse");
             }
         }
     </script>
