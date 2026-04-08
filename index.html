@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>¡Nivel de Fiesta Desbloqueado! - Said y Paulethe</title>
-    <meta property="og:title" content="¡Nivel de Fiesta Desbloqueado! - Said y Paulethe">
-<meta property="og:description" content="🎮 ¡Estás invitado! Acompáñanos a celebrar este domingo 12 de abril. ¡Presiona para ver los detalles!">
-<meta property="og:image" content="https://invitacionamievento.github.io/Invitaci-n-said-paulethe/images%20(26).jpeg">
-<meta property="og:url" content="https://invitacionamievento.github.io/Invitaci-n-said-paulethe/">
-<meta property="og:type" content="website">
-
-<meta name="twitter:card" content="summary_large_image">
     
+    <meta property="og:title" content="¡Nivel de Fiesta Desbloqueado! - Said y Paulethe">
+    <meta property="og:description" content="🎮 ¡Estás invitado! Acompáñanos a celebrar este domingo 12 de abril. ¡Presiona para ver los detalles!">
+    <meta property="og:image" content="https://invitacionamievento.github.io/Invitaci-n-said-paulethe/images%20(26).jpeg">
+    <meta property="og:url" content="https://invitacionamievento.github.io/Invitaci-n-said-paulethe/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
     
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
@@ -62,7 +61,6 @@
             transition: opacity 0.5s ease;
         }
 
-        /* BANDA DE INVITACIÓN SUPERIOR */
         .invitation-banner {
             background: #222;
             border: 4px solid #fff;
@@ -169,6 +167,12 @@
         .btn-confirm { background: #25d366; box-shadow: inset -4px -4px 0px #128c7e; }
         .btn-map { background: #f44336; box-shadow: inset -4px -4px 0px #b71c1c; }
 
+        /* Estilo para el footer animado */
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px #ffcc00; opacity: 0.8; }
+            50% { text-shadow: 0 0 20px #ffcc00; opacity: 1; }
+            100% { text-shadow: 0 0 5px #ffcc00; opacity: 0.8; }
+        }
     </style>
 </head>
 <body>
@@ -195,46 +199,58 @@
             <h2>SAID NEFTALÍ (9)</h2>
             <p style="font-family: 'Press Start 2P'; font-size: 0.8rem; margin: 10px 0;">&</p>
             <h2>PAULETHE ITANDEHUI (6)</h2>
-            <p style="margin: 20px 0; font-weight: bold; letter-spacing: 1px;">¡Estamos de Fiesta!<br></br> 
-            <br>Y queremos celebrarlo a lo grande... <br></br>!Y tu eres parte de la misión!
-            preparate para una tarde llena de risas, juegos, dulces, y mucha diversión 🎉🎊</br></p>
+            <p style="margin: 20px 0; font-weight: bold; letter-spacing: 1px;">¡Estamos de Fiesta!<br> 
+            <br>Y queremos celebrarlo a lo grande... <br>!Y tu eres parte de la misión!
+            preparate para una tarde llena de risas, juegos, dulces, y mucha diversión 🎉🎊</p>
             <hr style="opacity: 0.3; margin: 20px 0; border: 1px dashed #fff;">
             <p>TE ESPERAMOS!</p>
             <br>📍En diversiones PoingPoing:</br>
             <p>Lic Manuel Ruiz 300A, Reforma, 68050 Oaxaca de Juárez, Oax.</p>
             <hr style="opacity: 0.3; margin: 20px 0; border: 1px dashed #fff;">
             <p>📅 Domingo 12 de Abril, 2026</p>
-            <a href="https://maps.app.goo.gl/mts8bRb9jtbAcLdi6" target="_blank" class="btn btn-map">VER MAPA</a>
+            <a href="https://maps.app.goo.gl/mts8bRb9jtbAcLdi6" target="_blank" class="btn btn-map" onclick="playClick()">VER MAPA</a>
         </div>
 
         <div class="info-card">
             <p style="margin-bottom: 15px;">¿TE UNES A LA PARTIDA?</p>
             <hr style="opacity: 0.3; margin: 20px 0; border: 1px dashed #fff;">
             <br>Confirma tu asistencia</br>
-            <a href="https://wa.me/529515841063?text=¡Confirmo mi asistencia a la fiesta de Said y Paulethe! 🎮✨" class="btn btn-confirm">CONFIRMAR</a>
+            <a href="https://wa.me/529515841063?text=¡Confirmo mi asistencia a la fiesta de Said y Paulethe! 🎮✨" class="btn btn-confirm" onclick="playClick()">CONFIRMAR</a>
         </div>
+
         <div style="margin-top: 20px; padding: 10px; background: rgba(0,0,0,0.5); border: 2px solid #555; display: inline-block;">
-    <p style="font-family: 'Press Start 2P', cursive; font-size: 0.5rem; color: #aaa; margin-bottom: 5px;">VISITAS AL NIVEL:</p>
-    <div align="center">
-        <a href="https://www.freecounterstat.com" title="contador de visitas">
-            <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=6m8l1n6q7l1b1n6l7l1b1n6l7l1b1n6l" border="0" title="contador de visitas" alt="contador de visitas">
-        </a>
-    </div>
+            <p style="font-family: 'Press Start 2P', cursive; font-size: 0.5rem; color: #aaa; margin-bottom: 5px;">VISITAS AL NIVEL:</p>
+            <div align="center">
+                <a href="https://www.freecounterstat.com" title="contador de visitas">
+                    <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=6m8l1n6q7l1b1n6l7l1b1n6l7l1b1n6l" border="0" title="contador de visitas" alt="contador de visitas">
+                </a>
+            </div>
         </div>
     </div>
 
     <audio id="bgMusic" loop preload="auto">
         <source src="01. Minecraft - Lava Chicken (Original Game Soundtrack).mp3" type="audio/mpeg">
     </audio>
+    <audio id="clickSound" preload="auto">
+        <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
         const music = document.getElementById("bgMusic");
+        const click = document.getElementById("clickSound");
         const mainContent = document.getElementById("main-content");
         const overlay = document.getElementById("overlay");
         const icon = document.getElementById("music-icon");
         const txt = document.getElementById("btn-text");
 
+        // Función para el sonido de click
+        function playClick() {
+            click.currentTime = 0;
+            click.play();
+        }
+
         function revealInvitation() {
+            playClick(); // Sonido al empezar
             music.play().catch(e => console.log("Audio listo"));
             overlay.style.opacity = "0";
             setTimeout(() => {
@@ -247,6 +263,7 @@
         }
 
         function toggleMusic() {
+            playClick(); // Sonido al pausar/reproducir
             if (music.paused) {
                 music.play();
                 icon.innerHTML = "⏸️";
@@ -258,7 +275,8 @@
             }
         }
     </script>
-        <footer style="margin-top: 50px; padding: 20px; background: rgba(0,0,0,0.8); border-top: 3px solid #555; width: 100%; z-index: 10;">
+
+    <footer style="margin-top: 50px; padding: 20px; background: rgba(0,0,0,0.8); border-top: 3px solid #555; width: 100%; z-index: 10;">
         <p style="font-family: 'Press Start 2P', cursive; font-size: 0.6rem; color: #888; margin-bottom: 10px;">
             ¿QUIERES UNA INVITACIÓN ASÍ?
         </p>
@@ -271,15 +289,15 @@
         </div>
 
         <a href="https://wa.me/529512625159?text=Hola! Me interesa una invitación digital personalizada como la de Said y Paulethe 🎮" 
-           style="display: inline-block; margin-top: 15px; padding: 10px 15px; background: #0054b2; color: white; text-decoration: none; font-family: 'Press Start 2P', cursive; font-size: 0.5rem; border: 2px solid #fff; box-shadow: 4px 4px 0px #000;">
+           style="display: inline-block; margin-top: 15px; padding: 10px 15px; background: #0054b2; color: white; text-decoration: none; font-family: 'Press Start 2P', cursive; font-size: 0.5rem; border: 2px solid #fff; box-shadow: 4px 4px 0px #000;"
+           onclick="playClick()">
             CONTACTAR AL CREADOR
         </a>
 
         <p style="font-size: 10px; color: #444; margin-top: 15px; font-family: Arial, sans-serif;">
             © 2026 - Invitaciones Digitales Oaxaca
         </p>
-        </footer>
-    
+    </footer>
 
 </body>
 </html>
