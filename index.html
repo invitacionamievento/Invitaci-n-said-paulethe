@@ -200,5 +200,114 @@
 
         .btn:hover {
             transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 10px 20px rgba(0,0
-                                         
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0px) scale(1);
+        }
+
+        .btn-confirm {
+            background-color: #25d366; /* WhatsApp Green */
+            color: #fff;
+            border: 2px solid transparent;
+        }
+        .btn-confirm:hover {
+            background-color: transparent;
+            border-color: #25d366;
+            color: #25d366;
+        }
+
+        .btn-map {
+            background-color: #f44336; /* Google Maps Red */
+            color: #fff;
+            border: 2px solid transparent;
+        }
+        .btn-map:hover {
+            background-color: transparent;
+            border-color: #f44336;
+            color: #f44336;
+        }
+
+        /* --- MÚSICA MODERNIZADA --- */
+        .music-player {
+            margin-top: 20px;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            z-index: 1;
+        }
+        audio {
+            margin-top: 10px;
+            width: 100%;
+            max-width: 300px;
+            height: 35px;
+            outline: none;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+        audio:hover { opacity: 1; }
+
+        /* --- ANIMACIONES EXTRA --- */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideInDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes glitch {
+            0% { text-shadow: 1px 1px 0 #000, -1px -1px 0 #000; }
+            2% { text-shadow: 3px 0 0 red, -3px 0 0 blue; }
+            4% { text-shadow: -3px 0 0 red, 3px 0 0 blue; }
+            6% { text-shadow: 1px 1px 0 #000, -1px -1px 0 #000; }
+            100% { text-shadow: 1px 1px 0 #000, -1px -1px 0 #000; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="sonic-rings">
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+    </div>
+
+    <div class="container">
+        
+        <div class="titles-container">
+            <h1>¡NIVEL FIESTA DESCUBIERTO!</h1>
+        </div>
+        
+        <div class="info-card">
+            <h2>SAID NEFTALÍ (9 AÑOS)</h2>
+            <p>&</p>
+            <h2>PAULETHE ITANDEHUI (6 AÑOS)</h2>
+            
+            <p>Una aventura épica está por comenzar. ¡Corre a la velocidad de la luz y prepárate para construir los mejores recuerdos!</p>
+            
+            <div class="btn-group">
+                <h3>📅 Domingo 12 de Abril, 2026</h3>
+                <p>La partida inicia pronto...</p>
+                <a href="https://maps.app.goo.gl/mts8bRb9jtbAcLdi6" target="_blank" class="btn btn-map">📍 Ver Ubicación del Mapa</a>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h2>¿TE UNES A LA PARTIDA?</h2>
+            <p>Confirma antes de que se acbe el tiempo (GAME OVER).</p>
+            <div class="btn-group">
+                <a href="https://wa.me/529515841063?text=¡Hola! Confirmo mi asistencia a la súper fiesta de Said y Paulethe 🎮🏃‍♂️✨" target="_blank" class="btn btn-confirm">✅ Confirmar por WhatsApp</a>
+            </div>
+        </div>
+
+        <div class="music-player">
+            <p>🎧 Presiona Play para activar la banda sonora</p>
+            ) de la línea de abajo.
+            -->
+            <p>(La música se activará después de que interactúes con la página)</p>
+        </div>
+    </div>
+
+</body>
+</html>
