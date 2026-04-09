@@ -17,10 +17,12 @@
             --said-sky: #78A7FF;
             --said-card-bg: rgba(16, 16, 16, 0.9);
             --said-accent: #00ff00;
+            --said-gold: #FFD700;
             
             /* Colores Paulethe (Roblox Original) */
             --roblox-red: #CD1C1A;
             --roblox-dark: #121314;
+            --roblox-orange: #F68802;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -45,7 +47,7 @@
             color: #fff;
         }
         body.boy-mode h1, body.boy-mode h2, body.boy-mode .btn { font-family: 'Press Start 2P', cursive; }
-        body.boy-mode h1 { text-shadow: 4px 4px 0px #0054b2; }
+        body.boy-mode h1 { text-shadow: 4px 4px 0px #0054b2; margin-top: 20px;}
         body.boy-mode h2 { color: var(--said-accent); font-size: 0.8rem; }
         body.boy-mode .info-card {
             background: var(--said-card-bg);
@@ -54,11 +56,19 @@
         }
         body.boy-mode .btn-confirm { background: #25d366; box-shadow: inset -4px -4px 0px #128c7e; }
         body.boy-mode .btn-map { background: #f44336; box-shadow: inset -4px -4px 0px #b71c1c; }
+        body.boy-mode .btn-music-inline { 
+            background: var(--said-gold); 
+            color: #000; 
+            border: 3px solid #fff;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.6rem;
+            box-shadow: inset -3px -3px 0px #b8860b;
+        }
 
         /* --- ESTILO PAULETHE (ROBLOX MODE) --- */
         body.pink-mode {
             background-color: var(--roblox-dark);
-            background-image: url('robi.jpeg'); /* TU IMAGEN */
+            background-image: url('robi.jpeg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -66,7 +76,7 @@
             color: #fff;
         }
         body.pink-mode h1, body.pink-mode h2, body.pink-mode .btn { font-family: 'Hanken Grotesk', sans-serif; font-weight: 900; }
-        body.pink-mode h1 { font-size: 2.2rem; text-transform: uppercase; letter-spacing: -1px; }
+        body.pink-mode h1 { font-size: 2.2rem; text-transform: uppercase; letter-spacing: -1px; margin-top: 20px;}
         body.pink-mode h2 { color: var(--roblox-red); font-size: 1.4rem; text-transform: uppercase; }
         body.pink-mode .info-card {
             background: rgba(0, 0, 0, 0.8);
@@ -78,6 +88,15 @@
         body.pink-mode .btn { border-radius: 8px; text-transform: uppercase; border: none; }
         body.pink-mode .btn-confirm { background: var(--roblox-red); }
         body.pink-mode .btn-map { background: #393B3D; }
+        body.pink-mode .btn-music-inline { 
+            background: var(--roblox-orange); 
+            color: #fff; 
+            border: none;
+            font-family: 'Hanken Grotesk', sans-serif;
+            font-weight: 800;
+            text-transform: uppercase;
+            box-shadow: 0 4px 0px #a65c00;
+        }
 
         /* --- PANTALLA DE SELECCIÓN (OVERLAY) --- */
         #overlay {
@@ -122,16 +141,34 @@
         .btn { display: block; padding: 18px; text-decoration: none; color: white !important; margin: 15px auto; width: 100%; max-width: 300px; }
         
         .btn-music-inline {
-            background: rgba(255,255,255,0.1);
-            color: #fff;
-            padding: 10px 20px;
-            border: 1px solid #fff;
+            padding: 12px 25px;
             cursor: pointer;
             margin-bottom: 20px;
-            border-radius: 50px;
+            border-radius: 5px;
+            transition: 0.2s;
         }
+        .btn-music-inline:active { transform: scale(0.95); }
 
-        footer { margin-top: 40px; padding: 20px; background: rgba(0,0,0,0.9); width: 100%; color: #888; font-size: 0.7rem; }
+        footer { 
+            margin-top: 40px; 
+            padding: 30px 20px; 
+            background: rgba(0,0,0,0.9); 
+            width: 100%; 
+            color: #fff; 
+        }
+        .footer-text { font-size: 0.7rem; color: #888; margin-bottom: 10px; text-transform: uppercase; }
+        .footer-brand { color: #ffcc00; font-family: 'Press Start 2P', cursive; font-size: 0.9rem; display: block; margin-bottom: 15px; }
+        .footer-link { 
+            display: inline-block; 
+            color: #fff; 
+            text-decoration: none; 
+            border: 1px solid #fff; 
+            padding: 8px 15px; 
+            font-size: 0.75rem; 
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .footer-link:hover { background: #fff; color: #000; }
     </style>
 </head>
 <body>
@@ -169,12 +206,12 @@
             <p>📍 Diversiones PoingPoing</p>
             <p style="font-size: 0.8rem;">Lic Manuel Ruiz 300A, Reforma, Oaxaca.</p>
             
-            <a href="https://maps.google.com" target="_blank" class="btn btn-map">VER MAPA</a>
+            <a href="https://maps.app.goo.gl/9ZpYx1X6zY7J2T9z7" target="_blank" class="btn btn-map">VER MAPA</a>
         </div>
 
         <div class="info-card">
             <p id="unirse-text">¿TE UNES A LA PARTIDA?</p>
-            <a href="https://wa.me/529515841063?text=¡Confirmo mi asistencia!" class="btn btn-confirm">CONFIRMAR</a>
+            <a href="https://wa.me/529515841063?text=¡Confirmo mi asistencia a la fiesta de Said y Paulethe!" class="btn btn-confirm">CONFIRMAR</a>
         </div>
 
         <div style="padding: 10px; background: rgba(0,0,0,0.5); display: inline-block; border-radius: 5px;">
@@ -229,7 +266,18 @@
     </script>
 
     <footer>
-        DISEÑADO POR ALFA MASTER
+        <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">¿QUIERES UNA INVITACIÓN ASÍ?</p>
+        <div style="font-size: 0.9rem;">
+            Diseñado por: 
+            <span style="color: #ffcc00; font-family: 'Press Start 2P', cursive; animation: glow 2s infinite;">
+                ALFA MASTER
+            </span>
+        </div>
+        <a href="https://wa.me/529512625159?text=Hola! Me interesa una invitación personalizada" 
+           style="display: inline-block; margin-top: 15px; color: #fff; font-size: 0.8rem; text-decoration: none; border: 2px solid #fff; padding: 10px; font-weight: bold;"
+           onclick="playClick()">
+            [ CONTACTAR WHATSAPP ]
+        </a>
     </footer>
 </body>
 </html>
