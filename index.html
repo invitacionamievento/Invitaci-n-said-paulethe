@@ -8,10 +8,11 @@
     <meta property="og:title" content="¡Nivel de Fiesta Desbloqueado! - Said y Paulethe">
     <meta property="og:description" content="🎮 Minecraft o Roblox 🟥 ¡Elige tu aventura! Domingo 12 de abril.">
     <meta property="og:image" content="https://invitacionamievento.github.io/Invitaci-n-said-paulethe/images%20(26).jpeg">
-    <meta property="og:url" content="https://invitacionamievento.github.io/Invitaci-n-said-paulethe/">
-    <meta property="og:type" content="website">
     
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700;900&display=swap" rel="stylesheet"> <style>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
         :root {
             --said-sky: #78A7FF;
             --said-card-bg: rgba(16, 16, 16, 0.9);
@@ -24,9 +25,11 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        @keyframes backgroundScroll {
-            from { background-position: 0 0; }
-            to { background-position: 100% 100%; }
+        /* ANIMACIÓN DE DERECHA A IZQUIERDA */
+        @keyframes scrollBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         body {
@@ -37,119 +40,73 @@
             align-items: center;
             justify-content: center;
             overflow-x: hidden;
-            transition: all 0.5s ease;
-            background-attachment: fixed;
-            animation: backgroundScroll 60s linear infinite; /* Movimiento lento */
+            position: relative;
         }
 
-        /* --- ESTILO SAID (BOY MODE) --- */
-        body.boy-mode {
-            background-color: var(--said-sky);
-            background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images (26).jpeg');
-            background-size: 120%; /* Un poco más grande para el movimiento */
-            font-family: 'Segoe UI', sans-serif;
-            color: #fff;
-        }
-        body.boy-mode h1, body.boy-mode h2, body.boy-mode .btn { font-family: 'Press Start 2P', cursive; }
-        body.boy-mode h1 { text-shadow: 4px 4px 0px #0054b2; margin-top: 20px;}
-        body.boy-mode h2 { color: var(--said-accent); font-size: 0.8rem; }
-        body.boy-mode .info-card {
-            background: var(--said-card-bg);
-            border: 4px solid #555;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset -4px -4px 0px #000;
-        }
-        body.boy-mode .btn-confirm { background: #25d366; box-shadow: inset -4px -4px 0px #128c7e; }
-        body.boy-mode .btn-map { background: #f44336; box-shadow: inset -4px -4px 0px #b71c1c; }
-        body.boy-mode .btn-music-inline { 
-            background: var(--said-gold); color: #000; border: 3px solid #fff;
-            font-family: 'Press Start 2P', cursive; font-size: 0.6rem;
-            box-shadow: inset -3px -3px 0px #b8860b;
-        }
-
-        /* --- ESTILO PAULETHE (ROBLOX MODE) --- */
-        body.pink-mode {
-            background-color: var(--roblox-dark);
-            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('robi.jpeg');
-            background-size: 110%;
-            font-family: 'Hanken Grotesk', sans-serif;
-            color: #fff;
-        }
-        body.pink-mode h1, body.pink-mode h2, body.pink-mode .btn { font-family: 'Hanken Grotesk', sans-serif; font-weight: 900; }
-        body.pink-mode h1 { font-size: 2.2rem; text-transform: uppercase; letter-spacing: -1px; margin-top: 20px;}
-        body.pink-mode h2 { color: var(--roblox-red); font-size: 1.4rem; text-transform: uppercase; }
-        body.pink-mode .info-card {
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 15px;
-        }
-        body.pink-mode .btn { border-radius: 8px; text-transform: uppercase; border: none; }
-        body.pink-mode .btn-confirm { background: var(--roblox-red); box-shadow: 0 5px 0px #8a1210; }
-        body.pink-mode .btn-map { background: #393B3D; box-shadow: 0 5px 0px #222; }
-        body.pink-mode .btn-music-inline { 
-            background: var(--roblox-orange); color: #fff; border: none;
-            font-family: 'Hanken Grotesk', sans-serif; font-weight: 800;
-            text-transform: uppercase; box-shadow: 0 4px 0px #a65c00;
-        }
-
-        /* --- PANTALLA DE SELECCIÓN --- */
-        #overlay {
+        /* CAPA DE FONDO CON MOVIMIENTO Y DESENFOQUE */
+        body::before {
+            content: "";
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: #000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-            transition: opacity 0.5s ease;
-            padding: 20px;
+            top: -5%; left: -5%; /* Margen extra para evitar bordes blancos por el blur */
+            width: 110%; height: 110%;
+            z-index: -1;
+            background-size: cover;
+            background-repeat: no-repeat;
+            filter: blur(4px); /* Difuminado sutil */
+            -webkit-filter: blur(4px);
+            animation: scrollBackground 25s ease-in-out infinite; /* Movimiento de lado a lado */
+            transition: background 0.8s ease;
         }
+
+        /* ESTILOS DE FONDO POR MODO */
+        body.boy-mode::before {
+            background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images (26).jpeg');
+        }
+        body.pink-mode::before {
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('robi.jpeg');
+        }
+
+        /* --- ESTILO SAID --- */
+        body.boy-mode { font-family: 'Segoe UI', sans-serif; color: #fff; }
+        body.boy-mode h1, body.boy-mode h2, body.boy-mode .btn { font-family: 'Press Start 2P', cursive; }
+        body.boy-mode h1 { text-shadow: 4px 4px 0px #0054b2; margin-top: 20px; font-size: 1.2rem;}
+        body.boy-mode .info-card { background: var(--said-card-bg); border: 4px solid #555; box-shadow: inset -4px -4px 0px #000; }
+        body.boy-mode .btn-music-inline { background: var(--said-gold); color: #000; border: 3px solid #fff; font-size: 0.6rem; box-shadow: inset -3px -3px 0px #b8860b; }
+
+        /* --- ESTILO PAULETHE --- */
+        body.pink-mode { font-family: 'Hanken Grotesk', sans-serif; color: #fff; }
+        body.pink-mode h1 { font-size: 2.2rem; text-transform: uppercase; letter-spacing: -1px; margin-top: 20px;}
+        body.pink-mode .info-card { background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); }
+        body.pink-mode .btn-music-inline { background: var(--roblox-orange); color: #fff; border: none; font-weight: 800; box-shadow: 0 4px 0px #a65c00; }
+
+        /* --- INTERFAZ COMÚN --- */
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 999; transition: 0.5s; }
         .select-banner { border: 4px solid #fff; padding: 15px; margin-bottom: 30px; background: #1a1a1a; }
         .select-banner p { font-family: 'Press Start 2P', cursive; font-size: 0.8rem; color: gold; }
-        .btn-select { padding: 25px; cursor: pointer; width: 100%; max-width: 280px; margin: 10px; border: 4px solid #fff; color: white; transition: 0.1s; }
+        .btn-select { padding: 25px; cursor: pointer; width: 280px; margin: 10px; border: 4px solid #fff; color: white; }
         .btn-select.said { background: #3c3c3c; font-family: 'Press Start 2P', cursive; border-color: #00ff00; }
-        .btn-select.paulethe { background: var(--roblox-red); font-family: 'Hanken Grotesk', sans-serif; font-weight: 900; border-radius: 8px; border: none; font-size: 1.2rem; }
+        .btn-select.paulethe { background: var(--roblox-red); font-family: 'Hanken Grotesk', sans-serif; font-weight: 900; border-radius: 8px; font-size: 1.2rem; border: none;}
 
-        /* --- COMUNES --- */
-        #main-content { display: none; opacity: 0; width: 100%; max-width: 550px; padding: 20px; z-index: 1; }
-        .info-card { padding: 30px; margin-bottom: 25px; }
-        .btn { display: block; padding: 18px; text-decoration: none; color: white !important; margin: 15px auto; width: 100%; max-width: 300px; transition: 0.2s; }
-        .btn:active { transform: translateY(4px); box-shadow: none; }
-        
-        .btn-music-inline { padding: 12px 25px; cursor: pointer; margin-bottom: 20px; border-radius: 5px; }
+        #main-content { display: none; opacity: 0; width: 100%; max-width: 500px; padding: 20px; z-index: 1; margin-bottom: 50px; }
+        .info-card { padding: 25px; margin-bottom: 20px; }
+        .btn { display: block; padding: 18px; text-decoration: none; color: white !important; margin: 10px auto; width: 100%; max-width: 280px; }
+        .btn-music-inline { padding: 10px 20px; cursor: pointer; margin-bottom: 15px; border-radius: 5px; }
 
-        /* FOOTER DINÁMICO */
-        footer { margin-top: 40px; padding: 40px 20px; background: rgba(0,0,0,0.95); width: 100%; color: #fff; border-top: 2px solid #333; }
-        .footer-text { font-size: 0.7rem; color: #888; margin-bottom: 12px; letter-spacing: 1px; }
-        .footer-brand { color: #ffcc00; font-family: 'Press Start 2P', cursive; font-size: 0.9rem; display: block; margin-bottom: 20px; text-shadow: 2px 2px 0px #000; }
-        
-        .btn-footer-wa {
-            display: inline-block;
-            background: #25d366;
-            color: white !important;
-            text-decoration: none;
-            padding: 15px 25px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 900;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-            transition: 0.3s;
-            border: 2px solid transparent;
-        }
-        .btn-footer-wa:hover { background: #1ebe57; transform: scale(1.05); }
-        .btn-footer-wa:active { transform: scale(0.95); }
+        .btn-confirm { background: #25d366; border-radius: 8px; font-weight: bold; }
+        .btn-map { background: #f44336; border-radius: 8px; font-weight: bold; }
+
+        /* FOOTER */
+        footer { margin-top: auto; padding: 30px 20px; background: rgba(0,0,0,0.95); width: 100%; border-top: 2px solid #333; z-index: 2; position: relative; }
+        .footer-brand { color: #ffcc00; font-family: 'Press Start 2P', cursive; font-size: 0.8rem; display: block; margin-bottom: 15px; }
+        .btn-footer-wa { display: inline-block; background: #25d366; color: white !important; text-decoration: none; padding: 12px 20px; border-radius: 50px; font-size: 0.8rem; font-weight: 900; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
     </style>
 </head>
 <body>
 
     <div id="overlay">
-        <div class="select-banner">
-            <p>¡ELIGE TU JUEGO!</p>
-        </div>
-        <button class="btn-select said" onclick="revealInvitation('boy')">MINECRAFT<br><span style="font-size: 10px;">(SAID)</span></button>
-        <button class="btn-select paulethe" onclick="revealInvitation('girl')">ROBLOX<br><span style="font-size: 10px;">(PAULETHE)</span></button>
+        <div class="select-banner"><p>¡ELIGE TU JUEGO!</p></div>
+        <button class="btn-select said" onclick="revealInvitation('boy')">MINECRAFT<br><small>(SAID)</small></button>
+        <button class="btn-select paulethe" onclick="revealInvitation('girl')">ROBLOX<br><small>(PAULETHE)</small></button>
     </div>
 
     <div id="main-content">
@@ -160,20 +117,14 @@
         <h1>¡ESTÁS INVITADO!</h1>
 
         <div class="info-card">
-            <h2 id="name1">SAID NEFTALÍ (9)</h2>
-            <p style="margin: 10px 0;">&</p>
-            <h2 id="name2">PAULETHE ITANDEHUI (6)</h2>
-            
-            <p id="invitation-text" style="margin: 20px 0; font-weight: bold;">
-                ¡Estamos de Fiesta!<br>¡Y tú eres parte de la misión!<br>Prepárate para una tarde llena de diversión 🎉
-            </p>
-            
-            <hr style="opacity: 0.2; margin: 20px 0;">
+            <h2>SAID NEFTALÍ (9)</h2>
+            <p>&</p>
+            <h2>PAULETHE ITANDEHUI (6)</h2>
+            <p id="invitation-text" style="margin: 15px 0;">¡Eres parte de la misión!<br>Prepárate para la diversión 🎉</p>
+            <hr style="opacity: 0.2; margin: 15px 0;">
             <p>📅 Domingo 12 de Abril, 2026</p>
             <p>📍 Diversiones PoingPoing</p>
-            <p style="font-size: 0.8rem;">Lic Manuel Ruiz 300A, Reforma, Oaxaca.</p>
-            
-            <a href="https://maps.app.goo.gl/9uT5m1Lh66XU6Z987" target="_blank" class="btn btn-map">VER MAPA</a>
+            <a href="https://maps.app.goo.gl/9" target="_blank" class="btn btn-map">VER MAPA</a>
         </div>
 
         <div class="info-card">
@@ -181,7 +132,7 @@
             <a href="https://wa.me/529515841063?text=¡Confirmo mi asistencia!" class="btn btn-confirm">CONFIRMAR</a>
         </div>
 
-        <div style="padding: 10px; background: rgba(0,0,0,0.5); display: inline-block; border-radius: 5px; margin-bottom: 20px;">
+        <div style="background: rgba(0,0,0,0.5); display: inline-block; padding: 10px; border-radius: 5px;">
             <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=6m8l1n6q7l1b1n6l7l1b1n6l7l1b1n6l" border="0">
         </div>
     </div>
@@ -208,8 +159,7 @@
                 document.body.className = 'boy-mode';
                 currentMusic = musicBoy;
             }
-
-            currentMusic.play().catch(e => console.log("Audio manual requerido"));
+            currentMusic.play().catch(e => console.log("Play error"));
             overlay.style.opacity = "0";
             setTimeout(() => {
                 overlay.style.display = "none";
@@ -232,10 +182,9 @@
     </script>
 
     <footer>
-        <p class="footer-text">¿TE GUSTA ESTE DISEÑO?</p>
         <span class="footer-brand">ALFA MASTER</span>
-        <a href="https://wa.me/529512625159?text=Hola! Me interesa una invitación personalizada como la de Said y Paulethe" class="btn-footer-wa">
-            📲 CONTACTAR POR WHATSAPP
+        <a href="https://wa.me/529512625159?text=Hola! Me interesa una invitación personalizada" class="btn-footer-wa">
+            📲 CONTACTAR WHATSAPP
         </a>
     </footer>
 </body>
