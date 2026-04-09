@@ -13,19 +13,21 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700;900&display=swap" rel="stylesheet"> <style>
         :root {
-            /* Colores Said (Minecraft) */
             --said-sky: #78A7FF;
             --said-card-bg: rgba(16, 16, 16, 0.9);
             --said-accent: #00ff00;
             --said-gold: #FFD700;
-            
-            /* Colores Paulethe (Roblox Original) */
             --roblox-red: #CD1C1A;
             --roblox-dark: #121314;
             --roblox-orange: #F68802;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        @keyframes backgroundScroll {
+            from { background-position: 0 0; }
+            to { background-position: 100% 100%; }
+        }
 
         body {
             text-align: center;
@@ -36,13 +38,15 @@
             justify-content: center;
             overflow-x: hidden;
             transition: all 0.5s ease;
+            background-attachment: fixed;
+            animation: backgroundScroll 60s linear infinite; /* Movimiento lento */
         }
 
         /* --- ESTILO SAID (BOY MODE) --- */
         body.boy-mode {
             background-color: var(--said-sky);
-            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('images (26).jpeg');
-            background-size: cover;
+            background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images (26).jpeg');
+            background-size: 120%; /* Un poco más grande para el movimiento */
             font-family: 'Segoe UI', sans-serif;
             color: #fff;
         }
@@ -57,21 +61,16 @@
         body.boy-mode .btn-confirm { background: #25d366; box-shadow: inset -4px -4px 0px #128c7e; }
         body.boy-mode .btn-map { background: #f44336; box-shadow: inset -4px -4px 0px #b71c1c; }
         body.boy-mode .btn-music-inline { 
-            background: var(--said-gold); 
-            color: #000; 
-            border: 3px solid #fff;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.6rem;
+            background: var(--said-gold); color: #000; border: 3px solid #fff;
+            font-family: 'Press Start 2P', cursive; font-size: 0.6rem;
             box-shadow: inset -3px -3px 0px #b8860b;
         }
 
         /* --- ESTILO PAULETHE (ROBLOX MODE) --- */
         body.pink-mode {
             background-color: var(--roblox-dark);
-            background-image: url('robi.jpeg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('robi.jpeg');
+            background-size: 110%;
             font-family: 'Hanken Grotesk', sans-serif;
             color: #fff;
         }
@@ -83,22 +82,17 @@
             backdrop-filter: blur(8px);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
         }
         body.pink-mode .btn { border-radius: 8px; text-transform: uppercase; border: none; }
-        body.pink-mode .btn-confirm { background: var(--roblox-red); }
-        body.pink-mode .btn-map { background: #393B3D; }
+        body.pink-mode .btn-confirm { background: var(--roblox-red); box-shadow: 0 5px 0px #8a1210; }
+        body.pink-mode .btn-map { background: #393B3D; box-shadow: 0 5px 0px #222; }
         body.pink-mode .btn-music-inline { 
-            background: var(--roblox-orange); 
-            color: #fff; 
-            border: none;
-            font-family: 'Hanken Grotesk', sans-serif;
-            font-weight: 800;
-            text-transform: uppercase;
-            box-shadow: 0 4px 0px #a65c00;
+            background: var(--roblox-orange); color: #fff; border: none;
+            font-family: 'Hanken Grotesk', sans-serif; font-weight: 800;
+            text-transform: uppercase; box-shadow: 0 4px 0px #a65c00;
         }
 
-        /* --- PANTALLA DE SELECCIÓN (OVERLAY) --- */
+        /* --- PANTALLA DE SELECCIÓN --- */
         #overlay {
             position: fixed;
             top: 0; left: 0;
@@ -112,63 +106,40 @@
             transition: opacity 0.5s ease;
             padding: 20px;
         }
-
-        .select-banner {
-            border: 4px solid #fff;
-            padding: 15px;
-            margin-bottom: 30px;
-            background: #1a1a1a;
-        }
-
+        .select-banner { border: 4px solid #fff; padding: 15px; margin-bottom: 30px; background: #1a1a1a; }
         .select-banner p { font-family: 'Press Start 2P', cursive; font-size: 0.8rem; color: gold; }
-
-        .btn-select {
-            padding: 25px;
-            cursor: pointer;
-            width: 100%;
-            max-width: 280px;
-            margin: 10px;
-            border: 4px solid #fff;
-            color: white;
-            transition: transform 0.1s;
-        }
+        .btn-select { padding: 25px; cursor: pointer; width: 100%; max-width: 280px; margin: 10px; border: 4px solid #fff; color: white; transition: 0.1s; }
         .btn-select.said { background: #3c3c3c; font-family: 'Press Start 2P', cursive; border-color: #00ff00; }
         .btn-select.paulethe { background: var(--roblox-red); font-family: 'Hanken Grotesk', sans-serif; font-weight: 900; border-radius: 8px; border: none; font-size: 1.2rem; }
 
-        /* --- ELEMENTOS COMUNES --- */
+        /* --- COMUNES --- */
         #main-content { display: none; opacity: 0; width: 100%; max-width: 550px; padding: 20px; z-index: 1; }
         .info-card { padding: 30px; margin-bottom: 25px; }
-        .btn { display: block; padding: 18px; text-decoration: none; color: white !important; margin: 15px auto; width: 100%; max-width: 300px; }
+        .btn { display: block; padding: 18px; text-decoration: none; color: white !important; margin: 15px auto; width: 100%; max-width: 300px; transition: 0.2s; }
+        .btn:active { transform: translateY(4px); box-shadow: none; }
         
-        .btn-music-inline {
-            padding: 12px 25px;
-            cursor: pointer;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            transition: 0.2s;
-        }
-        .btn-music-inline:active { transform: scale(0.95); }
+        .btn-music-inline { padding: 12px 25px; cursor: pointer; margin-bottom: 20px; border-radius: 5px; }
 
-        footer { 
-            margin-top: 40px; 
-            padding: 30px 20px; 
-            background: rgba(0,0,0,0.9); 
-            width: 100%; 
-            color: #fff; 
-        }
-        .footer-text { font-size: 0.7rem; color: #888; margin-bottom: 10px; text-transform: uppercase; }
-        .footer-brand { color: #ffcc00; font-family: 'Press Start 2P', cursive; font-size: 0.9rem; display: block; margin-bottom: 15px; }
-        .footer-link { 
-            display: inline-block; 
-            color: #fff; 
-            text-decoration: none; 
-            border: 1px solid #fff; 
-            padding: 8px 15px; 
-            font-size: 0.75rem; 
-            font-weight: bold;
+        /* FOOTER DINÁMICO */
+        footer { margin-top: 40px; padding: 40px 20px; background: rgba(0,0,0,0.95); width: 100%; color: #fff; border-top: 2px solid #333; }
+        .footer-text { font-size: 0.7rem; color: #888; margin-bottom: 12px; letter-spacing: 1px; }
+        .footer-brand { color: #ffcc00; font-family: 'Press Start 2P', cursive; font-size: 0.9rem; display: block; margin-bottom: 20px; text-shadow: 2px 2px 0px #000; }
+        
+        .btn-footer-wa {
+            display: inline-block;
+            background: #25d366;
+            color: white !important;
+            text-decoration: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 900;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
             transition: 0.3s;
+            border: 2px solid transparent;
         }
-        .footer-link:hover { background: #fff; color: #000; }
+        .btn-footer-wa:hover { background: #1ebe57; transform: scale(1.05); }
+        .btn-footer-wa:active { transform: scale(0.95); }
     </style>
 </head>
 <body>
@@ -177,12 +148,8 @@
         <div class="select-banner">
             <p>¡ELIGE TU JUEGO!</p>
         </div>
-        <button class="btn-select said" onclick="revealInvitation('boy')">
-            MINECRAFT<br><span style="font-size: 10px;">(SAID)</span>
-        </button>
-        <button class="btn-select paulethe" onclick="revealInvitation('girl')">
-            ROBLOX<br><span style="font-size: 10px;">(PAULETHE)</span>
-        </button>
+        <button class="btn-select said" onclick="revealInvitation('boy')">MINECRAFT<br><span style="font-size: 10px;">(SAID)</span></button>
+        <button class="btn-select paulethe" onclick="revealInvitation('girl')">ROBLOX<br><span style="font-size: 10px;">(PAULETHE)</span></button>
     </div>
 
     <div id="main-content">
@@ -198,7 +165,7 @@
             <h2 id="name2">PAULETHE ITANDEHUI (6)</h2>
             
             <p id="invitation-text" style="margin: 20px 0; font-weight: bold;">
-                ¡Estamos de Fiesta!<br>Y queremos celebrarlo a lo grande...<br>¡Y tú eres parte de la misión!<br>Prepárate para una tarde llena de diversión 🎉
+                ¡Estamos de Fiesta!<br>¡Y tú eres parte de la misión!<br>Prepárate para una tarde llena de diversión 🎉
             </p>
             
             <hr style="opacity: 0.2; margin: 20px 0;">
@@ -206,15 +173,15 @@
             <p>📍 Diversiones PoingPoing</p>
             <p style="font-size: 0.8rem;">Lic Manuel Ruiz 300A, Reforma, Oaxaca.</p>
             
-            <a href="https://maps.app.goo.gl/9ZpYx1X6zY7J2T9z7" target="_blank" class="btn btn-map">VER MAPA</a>
+            <a href="https://maps.app.goo.gl/9uT5m1Lh66XU6Z987" target="_blank" class="btn btn-map">VER MAPA</a>
         </div>
 
         <div class="info-card">
             <p id="unirse-text">¿TE UNES A LA PARTIDA?</p>
-            <a href="https://wa.me/529515841063?text=¡Confirmo mi asistencia a la fiesta de Said y Paulethe!" class="btn btn-confirm">CONFIRMAR</a>
+            <a href="https://wa.me/529515841063?text=¡Confirmo mi asistencia!" class="btn btn-confirm">CONFIRMAR</a>
         </div>
 
-        <div style="padding: 10px; background: rgba(0,0,0,0.5); display: inline-block; border-radius: 5px;">
+        <div style="padding: 10px; background: rgba(0,0,0,0.5); display: inline-block; border-radius: 5px; margin-bottom: 20px;">
             <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=6m8l1n6q7l1b1n6l7l1b1n6l7l1b1n6l" border="0">
         </div>
     </div>
@@ -236,7 +203,6 @@
             if (choice === 'girl') {
                 document.body.className = 'pink-mode';
                 document.getElementById('invitation-text').innerHTML = "¡Estamos de Fiesta!<br>¡Eres parte de este gran bloque de diversión!<br>Prepárate para una tarde épica 🟥🎮";
-                document.getElementById('unirse-text').innerHTML = "¿TE UNES A LA PARTIDA?";
                 currentMusic = musicGirl;
             } else {
                 document.body.className = 'boy-mode';
@@ -266,17 +232,10 @@
     </script>
 
     <footer>
-        <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">¿QUIERES UNA INVITACIÓN ASÍ?</p>
-        <div style="font-size: 0.9rem;">
-            Diseñado por: 
-            <span style="color: #ffcc00; font-family: 'Press Start 2P', cursive; animation: glow 2s infinite;">
-                ALFA MASTER
-            </span>
-        </div>
-        <a href="https://wa.me/529512625159?text=Hola! Me interesa una invitación personalizada" 
-           style="display: inline-block; margin-top: 15px; color: #fff; font-size: 0.8rem; text-decoration: none; border: 2px solid #fff; padding: 10px; font-weight: bold;"
-           onclick="playClick()">
-            [ CONTACTAR WHATSAPP ]
+        <p class="footer-text">¿TE GUSTA ESTE DISEÑO?</p>
+        <span class="footer-brand">ALFA MASTER</span>
+        <a href="https://wa.me/529512625159?text=Hola! Me interesa una invitación personalizada como la de Said y Paulethe" class="btn-footer-wa">
+            📲 CONTACTAR POR WHATSAPP
         </a>
     </footer>
 </body>
